@@ -44,7 +44,7 @@
 <main class="shell">
   <nav class="nav">
     <a class="brand" href="#top" aria-label="Haji Sulman home">
-      <img src="haji.jpg" alt="Haji Sulman profile picture">
+      <img src="haji.jpg" alt="Haji Sulman logo">
       <span>
         <strong>Haji Sulman</strong>
         <small>Learn Trading Simply </small>
@@ -67,7 +67,7 @@
     <div>
       <div class="badge">
         <span class="dot"></span>
-        Free Telegram Learning Community 
+       
       </div>
 
       <h1>Learn with <em>Haji Sulman.</em></h1>
@@ -76,9 +76,9 @@
         Learn Entry, Target and Stop-Loss through simple chart examples.
         Follow a repeatable method to understand charts and manage risk,
         specially designed for beginners.
-       
-      </div>
+       </div>   
 
+    
       <div class="hero-actions">
         <a class="primary join-link"
            href="https://t.me/+j_NBPvjvIfc1NGE1">
@@ -129,7 +129,7 @@
       <span>The Simple Framework</span>
       <h2>Learn with Haji Sulman.</h2>
       <p>Understand charts with a simple and clear trading method.</p>
-      
+     
     </div>
 
     <div class="cards">
@@ -139,7 +139,7 @@
         <p>
           Learn when to enter the market using simple and practical
           chart examples.
-          <span class="hi" lang="hi"></span>
+          
         </p>
       </article>
 
@@ -149,7 +149,7 @@
         <p>
           Learn how to identify target levels and plan your
           profit-booking strategy.
-          <span class="hi" lang="hi"></span>
+         
         </p>
       </article>
 
@@ -159,7 +159,7 @@
         <p>
           Learn how to use stop-loss levels and develop the discipline
           needed to protect your capital.
-          <span class="hi" lang="hi"></span>
+         
         </p>
       </article>
     </div>
@@ -167,7 +167,7 @@
 
   <section class="join">
     <h2>Start Learning Trading Today.</h2>
-    <span class="hi" lang="hi"></span>
+    
 
     <p>
       Daily chart learning · Beginner-friendly explanations ·
@@ -177,7 +177,7 @@
 
     <a class="primary join-link"
        href="https://t.me/+j_NBPvjvIfc1NGE1">
-      Open Telegram Channel ·  <span>↗</span>
+      Open Telegram Channel · <span>↗</span>
     </a>
   </section>
 
@@ -186,7 +186,7 @@
     <br>
 
     Telegram:
-    <a href="https://t.me/+j_NBPvjvIfc1NGE1"
+    <a href="https://t.me/+dzMi6IrrWmhiN2M1"
        target="_blank"
        rel="noopener">
       @srsagency
@@ -195,6 +195,7 @@
     <div class="disclaimer">
       For educational purposes only. This is not investment,
       trading or financial advice.
+     
     </div>
   </footer>
 </main>
@@ -207,250 +208,218 @@
   </svg>
 </a>
 <script>
-(() => {
-  'use strict';
+  (() => {
+    'use strict';
 
-  const CONFIG = Object.freeze({
-    pixelId: '070697525716042',
-    telegramUrl: 'https://t.me/+j_NBPvjvIfc1NGE1',
-    minimumElapsedMs: 2500,
-    minimumVisibleMs: 2000,
-    minimumPointerHoldMs: 35,
-    maximumPointerToClickMs: 1800,
-    redirectDelayMs: 900,
-    fastRedirectDelayMs: 80,
-    dedupeDays: 30,
-    storageKey: 'telegram_real_subscribe_070697525716042_v2'
-  });
 
-  const openedAt = performance.now();
-  let navigating = false;
-  let subscribeSent = false;
-  let visibleTotalMs = 0;
-  let visibleStartedAt = null;
-  let pointerProof = null;
-  let keyboardProofAt = 0;
-
-  function loadMetaPixel() {
-    const guard = `__campaignPixel_${CONFIG.pixelId}`;
-
-    !function(f,b,e,v,n,t,s) {
-      if (f.fbq) return;
-      n = f.fbq = function() {
-        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = true;
-      n.version = '2.0';
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = true;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s);
-    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-    if (window[guard]) return;
-
-    let registered = false;
-    try {
-      if (typeof fbq.getState === 'function') {
-        registered = fbq.getState().pixels.some(
-          pixel => String(pixel.id) === CONFIG.pixelId
-        );
-      }
-    } catch (error) {}
-
-    if (!registered) fbq('init', CONFIG.pixelId);
-    window[guard] = true;
-  }
-
-  function pageVisible() {
-    return document.visibilityState === 'visible';
-  }
-
-  function updateVisibleTime() {
-    const now = performance.now();
-    if (pageVisible()) {
-      if (visibleStartedAt === null) visibleStartedAt = now;
-    } else if (visibleStartedAt !== null) {
-      visibleTotalMs += now - visibleStartedAt;
-      visibleStartedAt = null;
-    }
-  }
-
-  function visibleTimeMs() {
-    updateVisibleTime();
-    return visibleTotalMs +
-      (visibleStartedAt === null ? 0 : performance.now() - visibleStartedAt);
-  }
-
-  function automationDetected() {
-    return navigator.webdriver === true ||
-      /bot|crawler|spider|headless|phantom|selenium|playwright|puppeteer/i
-        .test(navigator.userAgent) ||
-      !window.screen ||
-      screen.width < 1 ||
-      screen.height < 1;
-  }
-
-  function savedTimestamp() {
-    try {
-      const stored = Number(localStorage.getItem(CONFIG.storageKey));
-      if (Number.isFinite(stored) && stored > 0) return stored;
-    } catch (error) {}
-
-    const match = document.cookie.match(
-      new RegExp('(?:^|; )' + CONFIG.storageKey + '=([0-9]+)')
-    );
-    return match ? Number(match[1]) : 0;
-  }
-
-  function alreadySubscribed() {
-    const timestamp = savedTimestamp();
-    return timestamp > 0 &&
-      Date.now() - timestamp < CONFIG.dedupeDays * 86400000;
-  }
-
-  function rememberSubscribe() {
-    const timestamp = String(Date.now());
-    try {
-      localStorage.setItem(CONFIG.storageKey, timestamp);
-    } catch (error) {}
-
-    document.cookie =
-      `${CONFIG.storageKey}=${timestamp}; Max-Age=${CONFIG.dedupeDays * 86400}; Path=/; SameSite=Lax`;
-  }
-
-  function createEventId() {
-    return window.crypto && typeof window.crypto.randomUUID === 'function'
-      ? `telegram_subscribe_${window.crypto.randomUUID()}`
-      : `telegram_subscribe_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-  }
-
-  function recordPointerDown(event) {
-    if (!event.isTrusted || automationDetected()) return;
-
-    pointerProof = {
-      target: event.currentTarget,
-      startedAt: performance.now(),
-      x: event.clientX,
-      y: event.clientY,
-      pointerId: event.pointerId
-    };
-  }
-
-  function recordKeyboard(event) {
-    if (event.isTrusted && (event.key === 'Enter' || event.key === ' ')) {
-      keyboardProofAt = performance.now();
-    }
-  }
-
-  function hasRealActivation(event) {
-    const now = performance.now();
-
-    if (event.detail === 0) {
-      return keyboardProofAt > 0 && now - keyboardProofAt <= 1500;
-    }
-
-    if (!pointerProof || pointerProof.target !== event.currentTarget) return false;
-
-    const duration = now - pointerProof.startedAt;
-    const samePointer =
-      typeof event.pointerId !== 'number' ||
-      event.pointerId === pointerProof.pointerId;
-
-    const distance = Math.hypot(
-      event.clientX - pointerProof.x,
-      event.clientY - pointerProof.y
-    );
-
-    return samePointer &&
-      duration >= CONFIG.minimumPointerHoldMs &&
-      duration <= CONFIG.maximumPointerToClickMs &&
-      distance <= 35;
-  }
-
-  function handleTelegramClick(event) {
-    event.preventDefault();
-    if (navigating) return;
-    navigating = true;
-
-    const elapsedMs = performance.now() - openedAt;
-    const activeMs = visibleTimeMs();
-
-    const qualified =
-      event.isTrusted &&
-      !automationDetected() &&
-      pageVisible() &&
-      elapsedMs >= CONFIG.minimumElapsedMs &&
-      activeMs >= CONFIG.minimumVisibleMs &&
-      hasRealActivation(event);
-
-    if (
-      qualified &&
-      !subscribeSent &&
-      !alreadySubscribed() &&
-      typeof window.fbq === 'function'
-    ) {
-      subscribeSent = true;
-
-      fbq(
-        'track',
-        'Subscribe',
-        {
-          value: 0,
-          currency: 'INR',
-          content_name: 'Telegram Community',
-          destination: 'Telegram',
-          active_seconds: Math.round(activeMs / 1000),
-          elapsed_seconds: Math.round(elapsedMs / 1000),
-          interaction_type: event.detail === 0 ? 'keyboard' : 'pointer'
-        },
-        { eventID: createEventId() }
-      );
-
-      rememberSubscribe();
-    }
-
-    window.setTimeout(
-      () => window.location.assign(CONFIG.telegramUrl),
-      qualified ? CONFIG.redirectDelayMs : CONFIG.fastRedirectDelayMs
-    );
-  }
-
-  function initialize() {
-    updateVisibleTime();
-    document.addEventListener('visibilitychange', updateVisibleTime);
-    window.addEventListener('focus', updateVisibleTime);
-    window.addEventListener('blur', updateVisibleTime);
-    window.addEventListener('pageshow', event => {
-      if (event.persisted) {
-        navigating = false;
-        pointerProof = null;
-        keyboardProofAt = 0;
-        updateVisibleTime();
-      }
+    const CONFIG = Object.freeze({
+      pixelId: '070697525716042',
+      telegramUrl: 'https://t.me/+j_NBPvjvIfc1NGE1',
+      pageViewDelayMs: 3000,
+      passiveReaderDelayMs: 8000,
+      minimumClickTimeMs: 1000,
+      trackedRedirectDelayMs: 700,
+      fastRedirectDelayMs: 50,
+      pageViewSessionKey: 'three_point_qualified_page_view'
     });
 
-    document.querySelectorAll('.join-link, .jnBtn, .telegram-join, #telegramBtn')
-      .forEach(button => {
-        if (button.tagName === 'A') button.href = CONFIG.telegramUrl;
-        button.addEventListener('pointerdown', recordPointerDown);
-        button.addEventListener('keydown', recordKeyboard);
+    const pageOpenedAt = Date.now();
+
+    let pageViewTracked = false;
+    let leadTracked = false;
+    let navigationStarted = false;
+    let humanInteractionDetected = false;
+
+   
+    function loadMetaPixel() {
+      const pixelGuardKey =
+        `__threePointPixelInitialized_${CONFIG.pixelId}`;
+
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+
+        if (!f._fbq) f._fbq = n;
+
+        n.push = n;
+        n.loaded = true;
+        n.version = '2.0';
+        n.queue = [];
+
+        t = b.createElement(e);
+        t.async = true;
+        t.src = v;
+
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      }(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js'
+      );
+
+      if (window[pixelGuardKey]) return;
+
+      let pixelAlreadyRegistered = false;
+
+      try {
+        if (typeof fbq.getState === 'function') {
+          const pixelState = fbq.getState();
+
+          pixelAlreadyRegistered = pixelState.pixels.some((pixel) =>
+            String(pixel.id) === String(CONFIG.pixelId)
+          );
+        }
+      } catch (error) {
+        pixelAlreadyRegistered = false;
+      }
+
+      if (!pixelAlreadyRegistered) {
+        fbq('init', CONFIG.pixelId);
+      }
+
+      window[pixelGuardKey] = true;
+    }
+
+    
+    function sessionPageViewExists() {
+      try {
+        return sessionStorage.getItem(CONFIG.pageViewSessionKey) === 'true';
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function saveSessionPageView() {
+      try {
+        sessionStorage.setItem(CONFIG.pageViewSessionKey, 'true');
+      } catch (error) {
+        
+      }
+    }
+
+    function automationDetected() {
+      return navigator.webdriver === true;
+    }
+
+    function tryQualifiedPageView() {
+      const timeOnPageMs = Date.now() - pageOpenedAt;
+      const interactionQualified =
+        humanInteractionDetected &&
+        timeOnPageMs >= CONFIG.pageViewDelayMs;
+      const passiveReaderQualified =
+        timeOnPageMs >= CONFIG.passiveReaderDelayMs;
+
+      const canTrack =
+        !pageViewTracked &&
+        !sessionPageViewExists() &&
+        !automationDetected() &&
+        (interactionQualified || passiveReaderQualified) &&
+        document.visibilityState === 'visible' &&
+        document.hasFocus() &&
+        typeof window.fbq === 'function';
+
+      if (!canTrack) return;
+
+      fbq('track', 'PageView', {
+        qualified_view: true,
+        human_interaction: humanInteractionDetected,
+        qualification: interactionQualified
+          ? 'interaction_3_seconds'
+          : 'focused_8_seconds',
+        time_on_page: Math.round(timeOnPageMs / 1000)
+      });
+
+      pageViewTracked = true;
+      saveSessionPageView();
+    }
+
+    function recordHumanInteraction(event) {
+      if (!event.isTrusted || humanInteractionDetected) return;
+
+      humanInteractionDetected = true;
+      tryQualifiedPageView();
+    }
+
+    function initializeVisitorQualification() {
+      ['pointerdown', 'touchstart', 'keydown', 'scroll', 'mousemove']
+        .forEach((eventName) => {
+          window.addEventListener(eventName, recordHumanInteraction, {
+            passive: true,
+            once: true
+          });
+        });
+
+      window.setTimeout(tryQualifiedPageView, CONFIG.pageViewDelayMs);
+      window.setTimeout(tryQualifiedPageView, CONFIG.passiveReaderDelayMs);
+    }
+
+  
+    function handleTelegramClick(event) {
+      event.preventDefault();
+
+      if (navigationStarted) return;
+      navigationStarted = true;
+
+      const timeOnPageMs = Date.now() - pageOpenedAt;
+      const isQualifiedClick =
+        event.isTrusted &&
+        !automationDetected() &&
+        timeOnPageMs >= CONFIG.minimumClickTimeMs;
+
+      if (
+        isQualifiedClick &&
+        !leadTracked &&
+        typeof window.fbq === 'function'
+      ) {
+        fbq('track', 'Lead', {
+          value: 0,
+          currency: 'INR',
+          destination: 'Telegram',
+          time_on_page: Math.round(timeOnPageMs / 1000)
+        });
+
+        leadTracked = true;
+      }
+
+      const redirectDelay = isQualifiedClick
+        ? CONFIG.trackedRedirectDelayMs
+        : CONFIG.fastRedirectDelayMs;
+
+      window.setTimeout(() => {
+        window.location.assign(CONFIG.telegramUrl);
+      }, redirectDelay);
+    }
+
+    function initializeTelegramButtons() {
+      const buttons = document.querySelectorAll('.join-link, .jnBtn');
+
+      buttons.forEach((button) => {
+        button.href = CONFIG.telegramUrl;
         button.addEventListener('click', handleTelegramClick);
       });
-  }
+    }
 
-  loadMetaPixel();
+  
+    loadMetaPixel();
+    initializeVisitorQualification();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initialize, { once: true });
-  } else {
-    initialize();
-  }
-})();
+    if (document.readyState === 'loading') {
+      document.addEventListener(
+        'DOMContentLoaded',
+        initializeTelegramButtons,
+        { once: true }
+      );
+    } else {
+      initializeTelegramButtons();
+    }
+  })();
 </script>
 </body>
 </html>
